@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vote</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .candidate {
+      margin: 10px 0;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #28a745;
+      border: none;
+      padding: 12px 25px;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cast Your Vote</h1>
+    <div class="candidate">
+      <input type="radio" name="candidate" value="Candidate A"> Candidate A
+    </div>
+    <div class="candidate">
+      <input type="radio" name="candidate" value="Candidate B"> Candidate B
+    </div>
+    <div class="candidate">
+      <input type="radio" name="candidate" value="Candidate C"> Candidate C
+    </div>
+    <button onclick="submitVote()">Submit Vote</button>
+  </div>
+  <script>
+    function submitVote() {
+      const voterId = localStorage.getItem('voterId');
+      const selected = document.querySelector('input[name="candidate"]:checked');
+      if (!selected) {
+        alert("Please select a candidate.");
+        return;
+      }
+      fetch('/vote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ voterId, vote: selected.value })
+      })
+      .then(res => res.json())
+      .then(data => alert(data.message))
+      .catch(err => alert("Error submitting vote."));
+    }
+  </script>
+</body>
+</html>
