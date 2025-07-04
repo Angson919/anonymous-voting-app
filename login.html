@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departmental Election Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://cdn.pixabay.com/photo/2017/08/28/11/06/artificial-intelligence-2685071_1280.jpg') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            padding: 50px;
+            animation: fadeIn 1s ease-in;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            margin: auto;
+            transform: scale(0.9);
+            animation: scaleIn 0.5s ease-in forwards;
+        }
+        h1 {
+            color: #333;
+            animation: slideIn 0.8s ease-in-out;
+        }
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease-in-out;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.9); }
+            to { transform: scale(1); }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <p>Select your role and login</p>
+        <select id="role">
+            <option value="user">Voter</option>
+            <option value="admin">Admin</option>
+        </select>
+        <input type="text" id="userId" placeholder="Enter your ID" required />
+        <button onclick="handleLogin()">Login</button>
+    </div>
+
+    <script>
+        function handleLogin() {
+            const role = document.getElementById('role').value;
+            const userId = document.getElementById('userId').value.trim();
+            if (!userId) {
+                alert('Please enter your ID.');
+                return;
+            }
+            localStorage.setItem('voterId', userId);
+            if (role === 'admin') {
+                window.location.href = 'admin.html';
+            } else {
+                window.location.href = 'vote.html';
+            }
+        }
+    </script>
+</body>
+</html>
