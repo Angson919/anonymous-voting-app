@@ -23,6 +23,7 @@ DeptVote is a secure, anonymous voting system designed for departmental election
 3. Visit the login page at `localhost:8000`
 
 ## 📸 Screenshot
+<img width="1917" height="1079" alt="Screenshot 2025-04-23 004310" src="https://github.com/user-attachments/assets/cf460114-0708-4034-a910-59995d7053be" />
 
 
 
